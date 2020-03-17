@@ -9,6 +9,7 @@
       :src="show.image.medium"
       :alt="show.name"
     />
+    <p v-html="show.summary"></p>
   </router-link>
 </template>
 
