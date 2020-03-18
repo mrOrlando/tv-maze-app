@@ -16,6 +16,19 @@ export default {
         dispatch('notification/add', notification, { root: true });
       }
     },
+    async fetchShow({ dispatch }, id) {
+      try {
+        const show = await ShowsService.getShow(id);
+        return show;
+      } catch (error) {
+        const notification = {
+          type: 'error',
+          message: "Can't load the show data: " + error.message,
+        };
+
+        dispatch('notification/add', notification, { root: true });
+      }
+    },
   },
   mutations: {
     UPDATE_SHOWS(state, shows) {

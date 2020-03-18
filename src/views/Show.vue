@@ -22,8 +22,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import ShowsService from '@/services/ShowsService';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   props: ['id'],
@@ -31,10 +30,15 @@ export default {
     return { show: {} };
   },
   computed: mapGetters('shows', ['getShow']),
+  methods: mapActions('shows', ['fetchShow']),
   async mounted() {
-    this.show = this.getShow(this.id);
+    const show = this.getShow(this.id);
+    if (show) {
+      this.show = show;
+    }
+
     // receives additional information about an show
-    this.show = await ShowsService.getShow(this.id);
+    this.show = await this.fetchShow(this.id);
   },
 };
 </script>
