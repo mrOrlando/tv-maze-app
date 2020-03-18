@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`shows/${show.id}`" :class="`card ${className}`">
+  <router-link :to="`shows/${show.id}`" class="card" :class="className">
     <div class="card__header">
       <h3 class="card__title">{{ show.name }}</h3>
     </div>
