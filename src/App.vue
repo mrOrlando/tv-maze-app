@@ -4,9 +4,20 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+    <NotificationContainer />
     <router-view />
   </div>
 </template>
+
+<script>
+import NotificationContainer from '@/components/NotificationContainer.vue';
+
+export default {
+  components: {
+    NotificationContainer,
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -28,5 +39,13 @@
       color: #42b983;
     }
   }
+}
+
+.-text-error {
+  color: tomato;
+}
+
+-text-success {
+  color: lightgreen;
 }
 </style>
