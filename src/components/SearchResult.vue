@@ -23,17 +23,17 @@ export default {
     SearchBox,
     Card,
   },
-  computed: mapGetters(['shows']),
+  computed: mapGetters('shows', ['shows']),
   async mounted() {
     // TODO: fetch popular shows
-    // this.$store.dispatch('fetchShows');
+    // this.$store.dispatch('shows/fetchShows');
     this.fetchShows('Friends');
   },
   methods: {
     async handleSearch(searchText) {
       this.fetchShows(searchText);
     },
-    ...mapActions(['fetchShows']),
+    ...mapActions('shows', ['fetchShows']),
   },
 };
 </script>

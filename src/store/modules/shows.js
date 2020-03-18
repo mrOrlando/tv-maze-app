@@ -1,6 +1,7 @@
 import ShowsService from '@/services/ShowsService';
 
 export default {
+  namespaced: true,
   actions: {
     async fetchShows({ commit }, searchText) {
       const shows = await ShowsService.getShows(searchText);
