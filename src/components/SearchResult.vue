@@ -24,7 +24,7 @@ export default {
     Card,
   },
   computed: mapGetters(['shows']),
-  async mouted() {
+  async mounted() {
     // TODO: fetch popular shows
     // this.$store.dispatch('fetchShows');
     this.fetchShows('Friends');
