@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ShowsService from '@/services/ShowsService';
+import { mapGetters, mapActions } from 'vuex';
 import SearchBox from '@/components/SearchBox';
 import Card from '@/components/Card';
 
@@ -23,19 +23,17 @@ export default {
     SearchBox,
     Card,
   },
-  data: function() {
-    return {
-      shows: [],
-    };
-  },
-  async created() {
+  computed: mapGetters(['shows']),
+  async mouted() {
     // TODO: fetch popular shows
-    this.shows = await ShowsService.getShows('Friends');
+    // this.$store.dispatch('fetchShows');
+    this.fetchShows('Friends');
   },
   methods: {
     async handleSearch(searchText) {
-      this.shows = await ShowsService.getShows(searchText);
+      this.fetchShows(searchText);
     },
+    ...mapActions(['fetchShows']),
   },
 };
 </script>
