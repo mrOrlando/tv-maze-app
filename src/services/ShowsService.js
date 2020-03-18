@@ -6,23 +6,15 @@ export const apiClient = axios.create({
 
 export default {
   async getShows(query) {
-    try {
-      const url = `/search/shows?q=${query}`;
-      const { data: shows } = await apiClient.get(url);
+    const url = `/search/shows?q=${query}`;
+    const { data: shows } = await apiClient.get(url);
 
-      return shows.map(show => show.show);
-    } catch (error) {
-      console.error("Can't load shows", error);
-    }
+    return shows.map(show => show.show);
   },
   async getShow(showId) {
-    try {
-      const url = `/shows/${showId}?embed=cast`;
-      const { data: show } = await apiClient.get(url);
+    const url = `/shows/${showId}?embed=cast`;
+    const { data: show } = await apiClient.get(url);
 
-      return show;
-    } catch (error) {
-      console.error("Can't load the show with id " + showId, error);
-    }
+    return show;
   },
 };
