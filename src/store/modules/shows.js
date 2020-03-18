@@ -29,8 +29,8 @@ export default {
     shows(state) {
       return state.items;
     },
-    getShow(state, id) {
-      return state.items.find(show => show.id === id);
+    getShow: state => id => {
+      return state.items.find(show => show.id == id);
     },
   },
 };
