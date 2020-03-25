@@ -23,3 +23,9 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('searchTVShow', tvShowName => {
+  // cy.get('input[type="text"]').type(tvShowName);
+  // cy.get('.search-panel').submit();
+  cy.get('input[data-test="search-input"]').type(`${tvShowName}{enter}`);
+});

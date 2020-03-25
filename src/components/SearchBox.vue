@@ -5,6 +5,7 @@
       type="text"
       placeholder="Enter a show name"
       v-model="searchText"
+      data-test="search-input"
     />
     <button class="search-panel__button" type="submit">Search</button>
   </form>
