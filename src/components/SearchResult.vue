@@ -41,15 +41,9 @@ export default {
 <style lang="scss">
 .search-result {
   &__content {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
-
-  &__item {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 4%;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tv-show">
     <h1 v-show="show.name">{{ show.name }}</h1>
     <img
       class="card__image"
@@ -10,14 +10,16 @@
     <div>Premiered: {{ show.premiered | date }}</div>
     <div v-if="show.rating && show.rating.average">Rating: {{ show.rating.average | rate }}</div>
     <p v-html="show.summary"></p>
-    <div v-if="show._embedded && show._embedded.cast">
-      <div v-for="cast in show._embedded.cast" :key="cast.id">
+    <div class="tv-show__cast" v-if="show._embedded && show._embedded.cast">
+      <div class="tv-show__actor" v-for="cast in show._embedded.cast" :key="cast.id">
         {{ cast.person.name }}
         <img
+          class="tv-show__actor-img"
           v-if="cast.person.image && cast.person.image.medium"
           :src="cast.person.image.medium"
           :alt="show.name"
         />
+        {{ cast.character.name }}
       </div>
     </div>
   </div>
@@ -53,3 +55,23 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.tv-show {
+  &__cast {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 1%;
+  }
+
+  &__actor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__actor-img {
+    max-width: 250px;
+  }
+}
+</style>
