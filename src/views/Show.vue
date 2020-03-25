@@ -7,6 +7,8 @@
       :src="show.image.medium"
       :alt="show.name"
     />
+    <div>Premiered: {{ show.premiered | date }}</div>
+    <div v-if="show.rating && show.rating.average">Rating: {{ show.rating.average | rate }}</div>
     <p v-html="show.summary"></p>
     <div v-if="show._embedded && show._embedded.cast">
       <div v-for="cast in show._embedded.cast" :key="cast.id">
@@ -39,6 +41,15 @@ export default {
 
     // receives additional information about an show
     this.show = await this.fetchShow(this.id);
+  },
+  filters: {
+    rate(rating) {
+      if (rating > 7) {
+        return `${rating} 👍`;
+      } else if (rating < 5) {
+        return `${rating} 👎`;
+      }
+    },
   },
 };
 </script>
