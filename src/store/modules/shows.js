@@ -16,9 +16,18 @@ export default {
         dispatch('notification/add', notification, { root: true });
       }
     },
-    async fetchShow({ dispatch }, id) {
+    async fetchShow({ commit, dispatch, state }, id) {
       try {
         const show = await ShowsService.getShow(id);
+
+        let shows = [];
+        if (state.items.length) {
+          shows = state.items.map(item => (item.id === show.id ? show : item));
+        } else {
+          shows = [show];
+        }
+
+        commit('UPDATE_SHOWS', shows);
         return show;
       } catch (error) {
         const notification = {
