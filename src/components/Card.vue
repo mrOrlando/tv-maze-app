@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`shows/${show.id}`" class="card" :class="className">
+  <router-link :to="`shows/${show.id}`" class="card">
     <div class="card__header">
       <h3 class="card__title" data-test="card-title">{{ show.name }}</h3>
     </div>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ['show', 'className'],
+  props: ['show'],
 };
 </script>
 
