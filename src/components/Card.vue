@@ -1,21 +1,30 @@
 <template>
-  <router-link :to="`shows/${show.id}`" class="card">
+  <router-link :to="urlOfShow" class="card">
     <div class="card__header">
       <h3 class="card__title" data-test="card-title">{{ show.name }}</h3>
     </div>
-    <img
-      class="card__image"
-      v-if="show.image && show.image.medium"
-      :src="show.image.medium"
-      :alt="show.name"
-    />
+    <img class="card__image" v-if="avatar" :src="avatar" :alt="show.name" />
     <p v-html="show.summary"></p>
   </router-link>
 </template>
 
 <script>
+import { ROUTE_NAMES } from '@/router';
+
 export default {
+  name: 'Card',
+
   props: ['show'],
+
+  computed: {
+    urlOfShow() {
+      return { name: ROUTE_NAMES.SHOW, params: { id: this.show.id } };
+    },
+
+    avatar() {
+      return this.show.image?.medium;
+    },
+  },
 };
 </script>
 
