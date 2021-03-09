@@ -1,19 +1,25 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
-import Show from '../views/Show.vue';
+import Home from '@/views/Home.vue';
+import Show from '@/views/Show.vue';
 
 Vue.use(VueRouter);
+
+export const ROUTE_NAMES = {
+  HOME: 'home',
+  ABOUT: 'about',
+  SHOW: 'show',
+};
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: ROUTE_NAMES.HOME,
     component: Home,
   },
   {
     path: '/about',
-    name: 'About',
+    name: ROUTE_NAMES.ABOUT,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -21,7 +27,7 @@ const routes = [
   },
   {
     path: '/shows/:id',
-    name: 'Show',
+    name: ROUTE_NAMES.SHOW,
     props: true,
     component: Show,
   },

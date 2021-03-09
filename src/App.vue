@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link :to="homeUrl">Home</router-link> |
+      <router-link :to="aboutUrl">About</router-link>
     </div>
     <NotificationContainer />
     <router-view />
@@ -10,11 +10,24 @@
 </template>
 
 <script>
+import { ROUTE_NAMES } from '@/router';
 import NotificationContainer from '@/components/NotificationContainer.vue';
 
 export default {
+  name: 'App',
+
   components: {
     NotificationContainer,
+  },
+
+  computed: {
+    homeUrl() {
+      return { name: ROUTE_NAMES.HOME };
+    },
+
+    aboutUrl() {
+      return { name: ROUTE_NAMES.ABOUT };
+    },
   },
 };
 </script>
