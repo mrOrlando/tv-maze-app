@@ -1,12 +1,22 @@
 import ShowsService from '@/services/ShowsService';
+import { grabPopularShows } from '@/helpers/shows.helper';
 
 export default {
   namespaced: true,
   actions: {
     async fetchShows({ commit, dispatch }, searchText) {
       try {
-        const shows = await ShowsService.getShows(searchText);
-        commit('UPDATE_SHOWS', shows);
+        if (searchText) {
+          const shows = await ShowsService.getShows(searchText);
+          commit('UPDATE_SHOWS', shows);
+        } else {
+          const { data: fullSchedule } = await ShowsService.getFullSchedule();
+
+          if (fullSchedule) {
+            const popularShows = grabPopularShows(fullSchedule);
+            commit('UPDATE_SHOWS', popularShows);
+          }
+        }
       } catch (error) {
         const notification = {
           type: 'error',

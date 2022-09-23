@@ -17,4 +17,8 @@ export default {
 
     return show;
   },
+  async getFullSchedule() {
+    const response = await apiClient.get(`/schedule/full`);
+    return response;
+  },
 };
