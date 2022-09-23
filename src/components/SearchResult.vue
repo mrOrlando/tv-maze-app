@@ -20,9 +20,8 @@ export default {
   },
   computed: mapGetters('shows', ['shows']),
   async mounted() {
-    // TODO: fetch popular shows
     // this.$store.dispatch('shows/fetchShows');
-    this.fetchShows('Friends');
+    this.fetchShows();
   },
   methods: {
     async handleSearch(searchText) {
