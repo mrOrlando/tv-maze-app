@@ -1,6 +1,6 @@
 # tv-maze-app
 
-Vue 2 app built with Vite. Unit tests with Vitest, E2E with Cypress.
+Vue 3 app built with Vite. Unit tests with Vitest, E2E with Cypress.
 
 ## Setup
 

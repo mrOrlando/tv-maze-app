@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue2';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   plugins: [vue()],
@@ -16,7 +16,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    include: ['tests/unit/**/*.spec.js'],
+    include: ['src/**/*.spec.js', 'tests/unit/**/*.spec.js'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],

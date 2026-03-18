@@ -7,8 +7,10 @@
       :src="show.image.medium"
       :alt="show.name"
     />
-    <div>Premiered: {{ show.premiered | date }}</div>
-    <div v-if="show.rating && show.rating.average">Rating: {{ show.rating.average | rate }}</div>
+    <div>Premiered: {{ formatDate(show.premiered) }}</div>
+    <div v-if="show.rating && show.rating.average">
+      Rating: {{ formatRate(show.rating.average) }}
+    </div>
     <p v-html="show.summary"></p>
     <div v-if="show._embedded && show._embedded.cast" class="tv-show__cast">
       <div v-for="cast in show._embedded.cast" :key="cast.id" class="tv-show__actor">
@@ -27,30 +29,32 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { formatDate as formatDateHelper } from '@/helpers/date.helper';
 
 export default {
   props: ['id'],
-  data: function () {
+  data() {
     return { show: {} };
   },
   computed: mapGetters('shows', ['getShow']),
-  methods: mapActions('shows', ['fetchShow']),
   async mounted() {
     const show = this.getShow(this.id);
     if (show) {
       this.show = show;
     }
-
-    // receives additional information about an show
     this.show = await this.fetchShow(this.id);
   },
-  filters: {
-    rate(rating) {
+  methods: {
+    ...mapActions('shows', ['fetchShow']),
+    formatDate: formatDateHelper,
+    formatRate(rating) {
       if (rating > 7) {
         return `${rating} 👍`;
-      } else if (rating < 5) {
+      }
+      if (rating < 5) {
         return `${rating} 👎`;
       }
+      return String(rating);
     },
   },
 };

@@ -1,4 +1,4 @@
-import ShowsService from '@/services/ShowsService';
+import ShowsService from '@/services/shows.service';
 import { grabPopularShows } from '@/helpers/shows.helper';
 
 export default {
