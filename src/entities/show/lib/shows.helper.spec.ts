@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { grabPopularShows } from './shows.helper';
+import type { ScheduleFullItem } from '@/shared/api/types';
 
 // Fixed "today" for predictable this-week window: 2024-06-15
 const MOCK_TODAY = '2024-06-15';
@@ -20,12 +21,15 @@ describe('shows.helper', () => {
     });
 
     it('skips episodes without _embedded.show', () => {
-      const data = [{ airdate: '2024-06-16', _embedded: {} }, { airdate: '2024-06-16' }];
+      const data: ScheduleFullItem[] = [
+        { airdate: '2024-06-16', _embedded: {} },
+        { airdate: '2024-06-16' },
+      ];
       expect(grabPopularShows(data)).toEqual([]);
     });
 
     it('skips episodes with airdate not in this week', () => {
-      const data = [
+      const data: ScheduleFullItem[] = [
         {
           airdate: '2024-06-01',
           _embedded: {
@@ -37,7 +41,7 @@ describe('shows.helper', () => {
     });
 
     it('skips shows with weight <= 98', () => {
-      const data = [
+      const data: ScheduleFullItem[] = [
         {
           airdate: '2024-06-16',
           _embedded: {
@@ -55,7 +59,7 @@ describe('shows.helper', () => {
         weight: 99,
         rating: { average: 8.5 },
       };
-      const data = [
+      const data: ScheduleFullItem[] = [
         {
           airdate: '2024-06-16',
           _embedded: { show },
@@ -71,7 +75,7 @@ describe('shows.helper', () => {
         weight: 99,
         rating: { average: 7 },
       };
-      const data = [
+      const data: ScheduleFullItem[] = [
         { airdate: '2024-06-16', _embedded: { show } },
         { airdate: '2024-06-17', _embedded: { show } },
       ];
@@ -97,7 +101,7 @@ describe('shows.helper', () => {
         weight: 100,
         rating: { average: 5 },
       };
-      const data = [
+      const data: ScheduleFullItem[] = [
         { airdate: '2024-06-16', _embedded: { show: showA } },
         { airdate: '2024-06-16', _embedded: { show: showB } },
         { airdate: '2024-06-16', _embedded: { show: showC } },

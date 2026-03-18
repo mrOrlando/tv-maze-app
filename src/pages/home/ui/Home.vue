@@ -4,6 +4,6 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { SearchResult } from '@/widgets/search-result';
 </script>

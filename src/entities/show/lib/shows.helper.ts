@@ -1,8 +1,10 @@
 import dayjs from 'dayjs';
 import orderBy from 'lodash.orderby';
+import type { Show } from '@/shared/api/types';
+import type { ScheduleFullItem } from '@/shared/api/types';
 
-export const grabPopularShows = data => {
-  const result = data.reduce(
+export function grabPopularShows(data: ScheduleFullItem[]): Show[] {
+  const result = data.reduce<{ shows: Show[]; ids: number[] }>(
     (acc, episode) => {
       const show = episode._embedded?.show;
 
@@ -15,7 +17,7 @@ export const grabPopularShows = data => {
         dayjs(episode.airdate).isBefore(dayjs().add(7, 'day'));
 
       if (!acc.ids.includes(show.id) && isThisWeek) {
-        if (show.weight > 98) {
+        if ((show.weight ?? 0) > 98) {
           acc.shows.push(show);
           acc.ids.push(show.id);
         }
@@ -26,5 +28,5 @@ export const grabPopularShows = data => {
     { shows: [], ids: [] }
   );
 
-  return orderBy(result.shows, ['weight', 'rating.average'], ['desc', 'desc']);
-};
+  return orderBy(result.shows, ['weight', 'rating.average'], ['desc', 'desc']) as Show[];
+}

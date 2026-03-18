@@ -8,16 +8,14 @@
   </router-link>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 import { ROUTE_NAMES } from '@/app/routes';
+import type { Show } from '@/shared/api/types';
 
-const props = defineProps({
-  show: {
-    type: Object,
-    required: true,
-  },
-});
+const props = defineProps<{
+  show: Show;
+}>();
 
 const urlOfShow = computed(() => ({
   name: ROUTE_NAMES.SHOW,

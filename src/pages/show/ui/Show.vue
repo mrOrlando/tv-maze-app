@@ -27,26 +27,24 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { formatDate as formatDateHelper } from '@/shared/lib/date';
+import type { Show } from '@/shared/api/types';
 
-const props = defineProps({
-  id: {
-    type: [String, Number],
-    required: true,
-  },
-});
+const props = defineProps<{
+  id: string | number;
+}>();
 
 const store = useStore();
-const show = ref({});
+const show = ref<Show>({} as Show);
 
-function formatDate(value) {
+function formatDate(value: string | undefined | null) {
   return formatDateHelper(value);
 }
 
-function formatRate(rating) {
+function formatRate(rating: number) {
   if (rating > 7) {
     return `${rating} 👍`;
   }
@@ -57,12 +55,15 @@ function formatRate(rating) {
 }
 
 onMounted(async () => {
-  const getShow = store.getters['shows/getShow'];
+  const getShow = store.getters['shows/getShow'] as (id: string | number) => Show | undefined;
   const existingShow = getShow(props.id);
   if (existingShow) {
     show.value = existingShow;
   }
-  show.value = await store.dispatch('shows/fetchShow', props.id);
+  const fetched = await store.dispatch('shows/fetchShow', props.id);
+  if (fetched) {
+    show.value = fetched;
+  }
 });
 </script>
 

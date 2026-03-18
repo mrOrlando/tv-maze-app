@@ -8,7 +8,7 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
-    extensions: ['.vue', '.js', '.mjs', '.json'],
+    extensions: ['.ts', '.tsx', '.vue', '.js', '.mjs', '.json'],
   },
   server: {
     port: 8080,
@@ -16,12 +16,12 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    include: ['src/**/*.spec.js', 'tests/unit/**/*.spec.js'],
+    include: ['src/**/*.spec.ts', 'tests/unit/**/*.spec.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      include: ['src/**/*.{vue,js}'],
-      exclude: ['src/app/entrypoint/main.js', '**/*.spec.js'],
+      include: ['src/**/*.{vue,ts}'],
+      exclude: ['src/app/entrypoint/main.ts', '**/*.spec.ts'],
     },
   },
 });

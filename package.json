@@ -15,7 +15,8 @@
     "test:unit:watch": "vitest",
     "test:e2e": "cypress run",
     "test:e2e:open": "cypress open",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix"
+    "lint": "eslint . --ext .vue,.js,.jsx,.ts,.tsx,.cjs,.mjs --fix",
+    "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -27,6 +28,9 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.1",
+    "@typescript-eslint/parser": "^8.57.1",
     "@vitejs/plugin-vue": "^5.0.0",
     "@vue/test-utils": "^2.4.0",
     "cypress": "^13.6.0",
@@ -38,8 +42,11 @@
     "jsdom": "^25.0.0",
     "prettier": "^3.3.0",
     "sass": "^1.77.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.1",
     "vite": "^5.4.0",
     "vitest": "^2.0.0",
-    "vue-eslint-parser": "^9.4.0"
+    "vue-eslint-parser": "^9.4.0",
+    "vue-tsc": "^3.2.6"
   }
 }

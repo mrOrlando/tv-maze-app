@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { SearchBox } from '@/features/search';
@@ -16,7 +16,7 @@ import { Card } from '@/entities/show';
 const store = useStore();
 const shows = computed(() => store.getters['shows/shows']);
 
-async function handleSearch(searchText) {
+async function handleSearch(searchText: string) {
   await store.dispatch('shows/fetchShows', searchText);
 }
 

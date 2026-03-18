@@ -4,23 +4,21 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useStore } from 'vuex';
+import type { NotificationItem } from '../model/store';
 
-const props = defineProps({
-  notification: {
-    type: Object,
-    required: true,
-  },
-});
+const props = defineProps<{
+  notification: NotificationItem;
+}>();
 
 const store = useStore();
-const timeout = ref(null);
+const timeout = ref<ReturnType<typeof setTimeout> | null>(null);
 
 const notificationTypeClass = computed(() => `-text-${props.notification.type}`);
 
-function remove(notification) {
+function remove(notification: NotificationItem) {
   store.dispatch('notification/remove', notification);
 }
 
@@ -29,7 +27,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  clearTimeout(timeout.value);
+  if (timeout.value) clearTimeout(timeout.value);
 });
 </script>
 
