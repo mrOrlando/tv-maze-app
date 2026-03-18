@@ -1,14 +1,17 @@
 <template>
   <div class="tv-show">
-    <NH1 v-if="show.name">{{ show.name }}</NH1>
-    <ShowMainCard v-if="show.name" :show="show" />
-    <div v-if="show._embedded?.cast" class="tv-show__cast">
-      <CastFlipCard
-        v-for="cast in show._embedded.cast"
-        :key="cast.person.id"
-        :cast="cast"
-      />
-    </div>
+    <ShowPageSkeleton v-if="showStore.detailLoading && !show.name" />
+    <template v-else>
+      <NH1 v-if="show.name">{{ show.name }}</NH1>
+      <ShowMainCard v-if="show.name" :show="show" />
+      <div v-if="show._embedded?.cast" class="tv-show__cast">
+        <CastFlipCard
+          v-for="cast in show._embedded.cast"
+          :key="cast.person.id"
+          :cast="cast"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -16,7 +19,7 @@
 import { ref, onMounted } from 'vue';
 import { NH1 } from 'naive-ui';
 import { useShowStore } from '@/entities/show';
-import { ShowMainCard, CastFlipCard } from '@/features/show-details';
+import { ShowMainCard, ShowPageSkeleton, CastFlipCard } from '@/features/show-details';
 import type { Show } from '@/shared/api/types';
 
 const props = defineProps<{

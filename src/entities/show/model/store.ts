@@ -6,11 +6,15 @@ import { useNotificationStore } from '@/entities/notification/model/store';
 
 export interface ShowState {
   items: Show[];
+  loading: boolean;
+  detailLoading: boolean;
 }
 
 export const useShowStore = defineStore('shows', {
   state: (): ShowState => ({
     items: [],
+    loading: false,
+    detailLoading: false,
   }),
   getters: {
     shows(state: ShowState): Show[] {
@@ -24,6 +28,7 @@ export const useShowStore = defineStore('shows', {
   },
   actions: {
     async fetchShows(searchText?: string): Promise<void> {
+      this.loading = true;
       try {
         if (searchText) {
           const shows = await ShowsService.getShows(searchText);
@@ -42,9 +47,12 @@ export const useShowStore = defineStore('shows', {
           type: 'error',
           message: "Can't load shows: " + err.message,
         });
+      } finally {
+        this.loading = false;
       }
     },
     async fetchShow(id: string | number): Promise<Show | undefined> {
+      this.detailLoading = true;
       try {
         const show = await ShowsService.getShow(id);
 
@@ -63,6 +71,8 @@ export const useShowStore = defineStore('shows', {
           type: 'error',
           message: "Can't load the show data: " + err.message,
         });
+      } finally {
+        this.detailLoading = false;
       }
     },
   },

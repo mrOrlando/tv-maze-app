@@ -2,7 +2,14 @@
   <div class="search-result">
     <SearchBox @change-search-box="handleSearch"></SearchBox>
     <div class="search-result__content">
-      <Card v-for="show in shows" :key="show.id" class="search-result__item" :show="show"></Card>
+      <template v-if="showStore.loading">
+        <CardSkeleton
+          v-for="i in skeletonCount"
+          :key="'skeleton-' + i"
+          class="search-result__item"
+        />
+      </template>
+      <Card v-else v-for="show in shows" :key="show.id" class="search-result__item" :show="show"></Card>
     </div>
   </div>
 </template>
@@ -11,8 +18,9 @@
 import { computed, onMounted } from 'vue';
 import { useShowStore } from '@/entities/show';
 import { SearchBox } from '@/features/search';
-import { Card } from '@/entities/show';
+import { Card, CardSkeleton } from '@/entities/show';
 
+const skeletonCount = 8;
 const showStore = useShowStore();
 const shows = computed(() => showStore.shows);
 
