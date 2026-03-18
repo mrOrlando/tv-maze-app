@@ -3,7 +3,7 @@
     <div class="card__header">
       <h3 class="card__title" data-test="card-title">{{ show.name }}</h3>
     </div>
-    <img class="card__image" v-if="avatar" :src="avatar" :alt="show.name" />
+    <img v-if="avatar" class="card__image" :src="avatar" :alt="show.name" />
     <p v-html="show.summary"></p>
   </router-link>
 </template>

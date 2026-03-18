@@ -1,10 +1,10 @@
 <template>
   <form class="search-panel" @submit.prevent="handleSearch">
     <input
+      v-model="searchText"
       class="search-panel__input"
       type="text"
       placeholder="Enter a show name"
-      v-model="searchText"
       data-test="search-input"
     />
     <button class="search-panel__button" type="submit">Search</button>
@@ -14,7 +14,7 @@
 <script>
 export default {
   name: 'SearchBox',
-  data: function() {
+  data: function () {
     return {
       searchText: '',
     };
