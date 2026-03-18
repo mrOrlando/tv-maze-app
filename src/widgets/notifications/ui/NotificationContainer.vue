@@ -1,15 +1,18 @@
 <template>
   <div class="notification-container">
-    <NotificationBar
-      v-for="notification in notifications"
-      :key="notification.id"
-      :notification="notification"
-    />
+    <NSpace vertical :size="12">
+      <NotificationBar
+        v-for="notification in notifications"
+        :key="notification.id"
+        :notification="notification"
+      />
+    </NSpace>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { NSpace } from 'naive-ui';
 import { useNotificationStore } from '@/entities/notification';
 import { NotificationBar } from '@/entities/notification';
 
@@ -22,6 +25,7 @@ const notifications = computed(() => notificationStore.notifications);
   position: fixed;
   right: 0;
   bottom: 0;
-  padding-right: 40px;
+  padding: 24px;
+  z-index: 1000;
 }
 </style>

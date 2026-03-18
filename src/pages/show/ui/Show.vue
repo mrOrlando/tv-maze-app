@@ -1,36 +1,22 @@
 <template>
   <div class="tv-show">
-    <h1 v-show="show.name">{{ show.name }}</h1>
-    <img
-      v-if="show.image && show.image.medium"
-      class="card__image"
-      :src="show.image.medium"
-      :alt="show.name"
-    />
-    <div>Premiered: {{ formatDate(show.premiered) }}</div>
-    <div v-if="show.rating && show.rating.average">
-      Rating: {{ formatRate(show.rating.average) }}
-    </div>
-    <p v-html="show.summary"></p>
-    <div v-if="show._embedded && show._embedded.cast" class="tv-show__cast">
-      <div v-for="cast in show._embedded.cast" :key="cast.person.id" class="tv-show__actor">
-        {{ cast.person.name }}
-        <img
-          v-if="cast.person.image && cast.person.image.medium"
-          class="tv-show__actor-img"
-          :src="cast.person.image.medium"
-          :alt="show.name"
-        />
-        {{ cast.character.name }}
-      </div>
+    <NH1 v-if="show.name">{{ show.name }}</NH1>
+    <ShowMainCard v-if="show.name" :show="show" />
+    <div v-if="show._embedded?.cast" class="tv-show__cast">
+      <CastFlipCard
+        v-for="cast in show._embedded.cast"
+        :key="cast.person.id"
+        :cast="cast"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { NH1 } from 'naive-ui';
 import { useShowStore } from '@/entities/show';
-import { formatDate as formatDateHelper } from '@/shared/lib/date';
+import { ShowMainCard, CastFlipCard } from '@/features/show-details';
 import type { Show } from '@/shared/api/types';
 
 const props = defineProps<{
@@ -39,20 +25,6 @@ const props = defineProps<{
 
 const showStore = useShowStore();
 const show = ref<Show>({} as Show);
-
-function formatDate(value: string | undefined | null) {
-  return formatDateHelper(value);
-}
-
-function formatRate(rating: number) {
-  if (rating > 7) {
-    return `${rating} 👍`;
-  }
-  if (rating < 5) {
-    return `${rating} 👎`;
-  }
-  return String(rating);
-}
 
 onMounted(async () => {
   const existingShow = showStore.getShow(props.id);
@@ -66,22 +38,17 @@ onMounted(async () => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .tv-show {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+
   &__cast {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 1%;
-  }
-
-  &__actor {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  &__actor-img {
-    max-width: 250px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
   }
 }
 </style>
