@@ -13,7 +13,7 @@
     </div>
     <p v-html="show.summary"></p>
     <div v-if="show._embedded && show._embedded.cast" class="tv-show__cast">
-      <div v-for="cast in show._embedded.cast" :key="cast.id" class="tv-show__actor">
+      <div v-for="cast in show._embedded.cast" :key="cast.person.id" class="tv-show__actor">
         {{ cast.person.name }}
         <img
           v-if="cast.person.image && cast.person.image.medium"
@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { useStore } from 'vuex';
+import { useShowStore } from '@/entities/show';
 import { formatDate as formatDateHelper } from '@/shared/lib/date';
 import type { Show } from '@/shared/api/types';
 
@@ -37,7 +37,7 @@ const props = defineProps<{
   id: string | number;
 }>();
 
-const store = useStore();
+const showStore = useShowStore();
 const show = ref<Show>({} as Show);
 
 function formatDate(value: string | undefined | null) {
@@ -55,12 +55,11 @@ function formatRate(rating: number) {
 }
 
 onMounted(async () => {
-  const getShow = store.getters['shows/getShow'] as (id: string | number) => Show | undefined;
-  const existingShow = getShow(props.id);
+  const existingShow = showStore.getShow(props.id);
   if (existingShow) {
     show.value = existingShow;
   }
-  const fetched = await store.dispatch('shows/fetchShow', props.id);
+  const fetched = await showStore.fetchShow(props.id);
   if (fetched) {
     show.value = fetched;
   }

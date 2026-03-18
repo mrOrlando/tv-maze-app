@@ -10,11 +10,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { useNotificationStore } from '@/entities/notification';
 import { NotificationBar } from '@/entities/notification';
 
-const store = useStore();
-const notifications = computed(() => store.state.notification.notifications);
+const notificationStore = useNotificationStore();
+const notifications = computed(() => notificationStore.notifications);
 </script>
 
 <style lang="scss" scoped>
