@@ -1,15 +1,18 @@
 <template>
   <router-link :to="urlOfShow" class="card">
-    <div class="card__header">
-      <h3 class="card__title" data-test="card-title">{{ show.name }}</h3>
-    </div>
-    <img v-if="avatar" class="card__image" :src="avatar" :alt="show.name" />
-    <p v-html="show.summary"></p>
+    <NCard>
+      <template #header>
+        <span data-test="card-title">{{ show.name }}</span>
+      </template>
+      <img v-if="avatar" class="card__image" :src="avatar" :alt="show.name" />
+      <p v-if="show.summary" v-html="show.summary"></p>
+    </NCard>
   </router-link>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { NCard } from 'naive-ui';
 import { ROUTE_NAMES } from '@/app/routes';
 import type { Show } from '@/shared/api/types';
 
@@ -25,30 +28,19 @@ const urlOfShow = computed(() => ({
 const avatar = computed(() => props.show.image?.medium);
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .card {
-  $root: &;
   text-decoration: none;
+  display: block;
 
-  &__header {
-    padding: 15px 0;
+  :deep(.n-card-header__main) {
+    font-weight: 600;
   }
+}
 
-  &__title {
-    font-size: 16px;
-    color: #11968a;
-    margin: 0;
-  }
-
-  &__image {
-    transition: all 0.2s;
-  }
-
-  &:hover {
-    #{$root}__image {
-      transform: translateY(-5px);
-      box-shadow: 0 0 11px 4px rgba(0, 0, 0, 0.25);
-    }
-  }
+.card__image {
+  width: 100%;
+  display: block;
+  margin-bottom: 8px;
 }
 </style>

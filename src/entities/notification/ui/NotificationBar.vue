@@ -1,11 +1,16 @@
 <template>
-  <div class="notification-bar" :class="notificationTypeClass">
-    <p>{{ notification.message }}</p>
-  </div>
+  <NAlert
+    :type="(notification.type as 'success' | 'info' | 'warning' | 'error')"
+    closable
+    @close="remove(notification)"
+  >
+    {{ notification.message }}
+  </NAlert>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { NAlert } from 'naive-ui';
 import { useNotificationStore } from '@/entities/notification';
 import type { NotificationItem } from '../model/store';
 
@@ -15,8 +20,6 @@ const props = defineProps<{
 
 const notificationStore = useNotificationStore();
 const timeout = ref<ReturnType<typeof setTimeout> | null>(null);
-
-const notificationTypeClass = computed(() => `-text-${props.notification.type}`);
 
 function remove(notification: NotificationItem) {
   notificationStore.remove(notification);
@@ -30,9 +33,3 @@ onBeforeUnmount(() => {
   if (timeout.value) clearTimeout(timeout.value);
 });
 </script>
-
-<style lang="scss" scoped>
-.notification-bar {
-  margin: 1em 0 1em;
-}
-</style>

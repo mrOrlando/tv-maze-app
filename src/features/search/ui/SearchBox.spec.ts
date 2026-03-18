@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import SearchBox from './SearchBox.vue';
 
 describe('SearchBox.vue', () => {
   it('renders search input and emits on submit', async () => {
-    const wrapper = shallowMount(SearchBox);
+    const wrapper = mount(SearchBox);
     const input = wrapper.find('input[data-test="search-input"]');
     expect(input.exists()).toBe(true);
 

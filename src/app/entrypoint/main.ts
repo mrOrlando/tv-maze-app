@@ -1,6 +1,12 @@
-import { createApp } from 'vue';
+import { createApp, h } from 'vue';
 import { createPinia } from 'pinia';
+import { NConfigProvider } from 'naive-ui';
 import App from '@/app/App.vue';
 import router from '@/app/routes';
 
-createApp(App).use(router).use(createPinia()).mount('#app');
+const app = createApp({
+  render() {
+    return h(NConfigProvider, null, { default: () => h(App) });
+  },
+});
+app.use(router).use(createPinia()).mount('#app');
