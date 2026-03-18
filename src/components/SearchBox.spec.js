@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
-import SearchBox from '@/components/SearchBox.vue';
+import SearchBox from './SearchBox.vue';
 
 describe('SearchBox.vue', () => {
   it('renders search input and emits on submit', async () => {

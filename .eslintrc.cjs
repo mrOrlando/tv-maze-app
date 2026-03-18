@@ -12,6 +12,9 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  settings: {
+    'vue/version': '3',
+  },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -22,7 +25,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/tests/unit/**/*.spec.js', '**/__tests__/**/*.js'],
+      files: ['**/tests/unit/**/*.spec.js', '**/__tests__/**/*.js', 'src/**/*.spec.js'],
       env: {
         node: true,
         es2022: true,
