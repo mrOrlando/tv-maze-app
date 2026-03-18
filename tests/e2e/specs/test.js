@@ -17,9 +17,7 @@ describe('My First Test', () => {
     cy.visit('/');
     cy.searchTVShow(show.name);
 
-    cy.get('.card')
-      .contains('[data-test="card-title"]', show.name)
-      .click();
+    cy.get('.card').contains('[data-test="card-title"]', show.name).click();
 
     cy.location('pathname').should('eq', `/shows/${show.id}`);
   });

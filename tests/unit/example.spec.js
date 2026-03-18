@@ -1,12 +1,17 @@
-import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { describe, it, expect } from 'vitest';
+import { shallowMount } from '@vue/test-utils';
+import SearchBox from '@/components/SearchBox.vue';
 
-describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
-    });
-    expect(wrapper.text()).toMatch(msg);
+describe('SearchBox.vue', () => {
+  it('renders search input and emits on submit', async () => {
+    const wrapper = shallowMount(SearchBox);
+    const input = wrapper.find('input[data-test="search-input"]');
+    expect(input.exists()).toBe(true);
+
+    await input.setValue('Friends');
+    await wrapper.find('form').trigger('submit.prevent');
+
+    expect(wrapper.emitted('change-search-box')).toBeTruthy();
+    expect(wrapper.emitted('change-search-box')[0]).toEqual(['Friends']);
   });
 });

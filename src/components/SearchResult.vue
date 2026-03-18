@@ -2,7 +2,7 @@
   <div class="search-result">
     <SearchBox @change-search-box="handleSearch"></SearchBox>
     <div class="search-result__content">
-      <Card v-for="show in shows" class="search-result__item" :show="show" :key="show.id"></Card>
+      <Card v-for="show in shows" :key="show.id" class="search-result__item" :show="show"></Card>
     </div>
   </div>
 </template>

@@ -1,34 +1,38 @@
 # tv-maze-app
 
-## Project setup
-```
+Vue 2 app built with Vite. Unit tests with Vitest, E2E with Cypress.
+
+## Setup
+
+```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Scripts
 
-### Compiles and minifies for production
-```
-npm run build
-```
+| Command | Description |
+|---------|-------------|
+| `npm run dev` / `npm run serve` | Start dev server (http://localhost:8080) |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Preview production build locally |
+| `npm run test:unit` | Run unit tests (Vitest) |
+| `npm run test:unit:watch` | Run unit tests in watch mode |
+| `npm run test:e2e` | Run E2E tests (Cypress headless) |
+| `npm run test:e2e:open` | Open Cypress UI |
+| `npm run lint` | Lint and fix with ESLint |
 
-### Run your unit tests
-```
-npm run test:unit
-```
+## E2E tests
 
-### Run your end-to-end tests
-```
+Start the app, then run Cypress:
+
+```bash
+npm run dev
+# In another terminal:
 npm run test:e2e
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Configuration
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- **Vite**: `vite.config.js`
+- **Cypress**: `cypress.config.js`
+- **ESLint**: `.eslintrc.cjs`

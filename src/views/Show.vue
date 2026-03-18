@@ -2,20 +2,20 @@
   <div class="tv-show">
     <h1 v-show="show.name">{{ show.name }}</h1>
     <img
-      class="card__image"
       v-if="show.image && show.image.medium"
+      class="card__image"
       :src="show.image.medium"
       :alt="show.name"
     />
     <div>Premiered: {{ show.premiered | date }}</div>
     <div v-if="show.rating && show.rating.average">Rating: {{ show.rating.average | rate }}</div>
     <p v-html="show.summary"></p>
-    <div class="tv-show__cast" v-if="show._embedded && show._embedded.cast">
-      <div class="tv-show__actor" v-for="cast in show._embedded.cast" :key="cast.id">
+    <div v-if="show._embedded && show._embedded.cast" class="tv-show__cast">
+      <div v-for="cast in show._embedded.cast" :key="cast.id" class="tv-show__actor">
         {{ cast.person.name }}
         <img
-          class="tv-show__actor-img"
           v-if="cast.person.image && cast.person.image.medium"
+          class="tv-show__actor-img"
           :src="cast.person.image.medium"
           :alt="show.name"
         />
@@ -30,7 +30,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   props: ['id'],
-  data: function() {
+  data: function () {
     return { show: {} };
   },
   computed: mapGetters('shows', ['getShow']),
