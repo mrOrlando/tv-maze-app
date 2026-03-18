@@ -27,37 +27,43 @@
   </div>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex';
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useStore } from 'vuex';
 import { formatDate as formatDateHelper } from '@/shared/lib/date';
 
-export default {
-  props: ['id'],
-  data() {
-    return { show: {} };
+const props = defineProps({
+  id: {
+    type: [String, Number],
+    required: true,
   },
-  computed: mapGetters('shows', ['getShow']),
-  async mounted() {
-    const show = this.getShow(this.id);
-    if (show) {
-      this.show = show;
-    }
-    this.show = await this.fetchShow(this.id);
-  },
-  methods: {
-    ...mapActions('shows', ['fetchShow']),
-    formatDate: formatDateHelper,
-    formatRate(rating) {
-      if (rating > 7) {
-        return `${rating} 👍`;
-      }
-      if (rating < 5) {
-        return `${rating} 👎`;
-      }
-      return String(rating);
-    },
-  },
-};
+});
+
+const store = useStore();
+const show = ref({});
+
+function formatDate(value) {
+  return formatDateHelper(value);
+}
+
+function formatRate(rating) {
+  if (rating > 7) {
+    return `${rating} 👍`;
+  }
+  if (rating < 5) {
+    return `${rating} 👎`;
+  }
+  return String(rating);
+}
+
+onMounted(async () => {
+  const getShow = store.getters['shows/getShow'];
+  const existingShow = getShow(props.id);
+  if (existingShow) {
+    show.value = existingShow;
+  }
+  show.value = await store.dispatch('shows/fetchShow', props.id);
+});
 </script>
 
 <style lang="scss">

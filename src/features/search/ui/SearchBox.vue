@@ -11,20 +11,15 @@
   </form>
 </template>
 
-<script>
-export default {
-  name: 'SearchBox',
-  data: function () {
-    return {
-      searchText: '',
-    };
-  },
-  methods: {
-    async handleSearch() {
-      this.$emit('change-search-box', this.searchText);
-    },
-  },
-};
+<script setup>
+import { ref } from 'vue';
+
+const emit = defineEmits(['change-search-box']);
+const searchText = ref('');
+
+function handleSearch() {
+  emit('change-search-box', searchText.value);
+}
 </script>
 
 <style lang="scss">

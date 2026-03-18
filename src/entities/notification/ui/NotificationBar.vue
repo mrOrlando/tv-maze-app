@@ -4,34 +4,33 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from 'vuex';
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { useStore } from 'vuex';
 
-export default {
-  props: {
-    notification: {
-      type: Object,
-      required: true,
-    },
+const props = defineProps({
+  notification: {
+    type: Object,
+    required: true,
   },
-  data() {
-    return {
-      timeout: null,
-    };
-  },
-  computed: {
-    notificationTypeClass() {
-      return `-text-${this.notification.type}`;
-    },
-  },
-  mounted() {
-    this.timeout = setTimeout(() => this.remove(this.notification), 5000);
-  },
-  beforeUnmount() {
-    clearTimeout(this.timeout);
-  },
-  methods: mapActions('notification', ['remove']),
-};
+});
+
+const store = useStore();
+const timeout = ref(null);
+
+const notificationTypeClass = computed(() => `-text-${props.notification.type}`);
+
+function remove(notification) {
+  store.dispatch('notification/remove', notification);
+}
+
+onMounted(() => {
+  timeout.value = setTimeout(() => remove(props.notification), 5000);
+});
+
+onBeforeUnmount(() => {
+  clearTimeout(timeout.value);
+});
 </script>
 
 <style lang="scss" scoped>
