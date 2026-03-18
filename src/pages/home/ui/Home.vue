@@ -4,13 +4,6 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { SearchResult } from '@/widgets/search-result';
-
-export default {
-  name: 'Home',
-  components: {
-    SearchResult,
-  },
-};
 </script>

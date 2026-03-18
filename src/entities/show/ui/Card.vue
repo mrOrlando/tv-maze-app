@@ -8,24 +8,23 @@
   </router-link>
 </template>
 
-<script>
+<script setup>
+import { computed } from 'vue';
 import { ROUTE_NAMES } from '@/app/routes';
 
-export default {
-  name: 'Card',
-
-  props: ['show'],
-
-  computed: {
-    urlOfShow() {
-      return { name: ROUTE_NAMES.SHOW, params: { id: this.show.id } };
-    },
-
-    avatar() {
-      return this.show.image?.medium;
-    },
+const props = defineProps({
+  show: {
+    type: Object,
+    required: true,
   },
-};
+});
+
+const urlOfShow = computed(() => ({
+  name: ROUTE_NAMES.SHOW,
+  params: { id: props.show.id },
+}));
+
+const avatar = computed(() => props.show.image?.medium);
 </script>
 
 <style lang="scss">

@@ -7,28 +7,22 @@
   </div>
 </template>
 
-<script>
-import { mapGetters, mapActions } from 'vuex';
+<script setup>
+import { computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
 import { SearchBox } from '@/features/search';
 import { Card } from '@/entities/show';
 
-export default {
-  name: 'SearchResult',
-  components: {
-    SearchBox,
-    Card,
-  },
-  computed: mapGetters('shows', ['shows']),
-  async mounted() {
-    this.fetchShows();
-  },
-  methods: {
-    async handleSearch(searchText) {
-      this.fetchShows(searchText);
-    },
-    ...mapActions('shows', ['fetchShows']),
-  },
-};
+const store = useStore();
+const shows = computed(() => store.getters['shows/shows']);
+
+async function handleSearch(searchText) {
+  await store.dispatch('shows/fetchShows', searchText);
+}
+
+onMounted(() => {
+  store.dispatch('shows/fetchShows');
+});
 </script>
 
 <style lang="scss">

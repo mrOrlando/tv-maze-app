@@ -9,27 +9,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed } from 'vue';
 import { ROUTE_NAMES } from '@/app/routes';
 import { NotificationContainer } from '@/widgets/notifications';
 
-export default {
-  name: 'App',
-
-  components: {
-    NotificationContainer,
-  },
-
-  computed: {
-    homeUrl() {
-      return { name: ROUTE_NAMES.HOME };
-    },
-
-    aboutUrl() {
-      return { name: ROUTE_NAMES.ABOUT };
-    },
-  },
-};
+const homeUrl = computed(() => ({ name: ROUTE_NAMES.HOME }));
+const aboutUrl = computed(() => ({ name: ROUTE_NAMES.ABOUT }));
 </script>
 
 <style lang="scss">

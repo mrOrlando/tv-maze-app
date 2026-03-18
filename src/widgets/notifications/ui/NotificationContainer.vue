@@ -8,16 +8,13 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex';
+<script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import { NotificationBar } from '@/entities/notification';
 
-export default {
-  components: {
-    NotificationBar,
-  },
-  computed: mapState('notification', ['notifications']),
-};
+const store = useStore();
+const notifications = computed(() => store.state.notification.notifications);
 </script>
 
 <style lang="scss" scoped>
