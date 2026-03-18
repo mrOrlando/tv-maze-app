@@ -1,4 +1,4 @@
-import type { Module } from 'vuex';
+import { defineStore } from 'pinia';
 
 export interface NotificationItem {
   id: number;
@@ -6,35 +6,20 @@ export interface NotificationItem {
   message: string;
 }
 
-export interface NotificationState {
-  notifications: NotificationItem[];
-}
-
 let nextId = 1;
 
-const notificationStore: Module<NotificationState, unknown> = {
-  namespaced: true,
-  state: {
-    notifications: [],
-  },
-  mutations: {
-    PUSH(state, notification: Omit<NotificationItem, 'id'>) {
-      state.notifications.push({ ...notification, id: nextId++ });
+export const useNotificationStore = defineStore('notification', {
+  state: () => ({
+    notifications: [] as NotificationItem[],
+  }),
+  actions: {
+    add(notification: Omit<NotificationItem, 'id'>) {
+      this.notifications.push({ ...notification, id: nextId++ });
     },
-    DELETE(state, notificationToRemove: NotificationItem) {
-      state.notifications = state.notifications.filter(
+    remove(notificationToRemove: NotificationItem) {
+      this.notifications = this.notifications.filter(
         notification => notification.id !== notificationToRemove.id
       );
     },
   },
-  actions: {
-    add({ commit }, notification: Omit<NotificationItem, 'id'>) {
-      commit('PUSH', notification);
-    },
-    remove({ commit }, notificationToRemove: NotificationItem) {
-      commit('DELETE', notificationToRemove);
-    },
-  },
-};
-
-export default notificationStore;
+});

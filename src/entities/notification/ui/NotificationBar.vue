@@ -6,20 +6,20 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
-import { useStore } from 'vuex';
+import { useNotificationStore } from '@/entities/notification';
 import type { NotificationItem } from '../model/store';
 
 const props = defineProps<{
   notification: NotificationItem;
 }>();
 
-const store = useStore();
+const notificationStore = useNotificationStore();
 const timeout = ref<ReturnType<typeof setTimeout> | null>(null);
 
 const notificationTypeClass = computed(() => `-text-${props.notification.type}`);
 
 function remove(notification: NotificationItem) {
-  store.dispatch('notification/remove', notification);
+  notificationStore.remove(notification);
 }
 
 onMounted(() => {

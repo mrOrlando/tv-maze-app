@@ -9,19 +9,19 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
+import { useShowStore } from '@/entities/show';
 import { SearchBox } from '@/features/search';
 import { Card } from '@/entities/show';
 
-const store = useStore();
-const shows = computed(() => store.getters['shows/shows']);
+const showStore = useShowStore();
+const shows = computed(() => showStore.shows);
 
 async function handleSearch(searchText: string) {
-  await store.dispatch('shows/fetchShows', searchText);
+  await showStore.fetchShows(searchText);
 }
 
 onMounted(() => {
-  store.dispatch('shows/fetchShows');
+  showStore.fetchShows();
 });
 </script>
 
