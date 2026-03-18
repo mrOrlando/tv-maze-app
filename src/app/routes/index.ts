@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { HomePage } from '@/pages/home';
 import { ShowPage } from '@/pages/show';
+import { ActorPage } from '@/pages/actor';
 
 export const ROUTE_NAMES = {
   HOME: 'home',
   ABOUT: 'about',
   SHOW: 'show',
+  ACTOR: 'actor',
 } as const;
 
 const routes = [
@@ -24,6 +26,12 @@ const routes = [
     name: ROUTE_NAMES.SHOW,
     props: true,
     component: ShowPage,
+  },
+  {
+    path: '/actors/:id',
+    name: ROUTE_NAMES.ACTOR,
+    props: true,
+    component: ActorPage,
   },
 ];
 

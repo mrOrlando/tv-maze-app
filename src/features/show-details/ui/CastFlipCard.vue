@@ -1,5 +1,5 @@
 <template>
-  <div class="cast-flip-card">
+  <RouterLink :to="actorUrl" class="cast-flip-card">
     <div class="cast-flip-card__inner">
       <div class="cast-flip-card__face cast-flip-card__face--front">
         <NCard class="cast-flip-card__actor-card">
@@ -38,20 +38,30 @@
         </NCard>
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { NCard, NText, NSpace } from 'naive-ui';
+import { ROUTE_NAMES } from '@/app/routes';
 import type { CastEntry } from '@/shared/api/types';
 
-defineProps<{
+const props = defineProps<{
   cast: CastEntry;
 }>();
+
+const actorUrl = computed(() => ({
+  name: ROUTE_NAMES.ACTOR,
+  params: { id: props.cast.person.id },
+}));
 </script>
 
 <style lang="scss" scoped>
 .cast-flip-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   perspective: 1000px;
   min-height: 440px;
 

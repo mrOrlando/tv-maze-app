@@ -123,6 +123,19 @@ export type EpisodeRating = {
   average: number | null;
 };
 
+/** Cast credit from GET /people/:id/castcredits?embed=show */
+export type PersonCastCredit = {
+  self?: boolean;
+  voice?: boolean;
+  _links?: {
+    show: ApiLink & { name?: string };
+    character: ApiLink & { name?: string };
+  };
+  _embedded?: {
+    show?: Show;
+  };
+};
+
 /** Item from GET /schedule/full — episode with embedded show */
 export type ScheduleFullItem = {
   id?: number;
