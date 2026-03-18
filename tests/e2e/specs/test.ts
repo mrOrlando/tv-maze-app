@@ -1,5 +1,3 @@
-// https://docs.cypress.io/api/introduction/api.html
-
 const show = {
   id: 431,
   url: 'http://www.tvmaze.com/shows/431/friends',

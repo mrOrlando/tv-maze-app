@@ -6,7 +6,7 @@ export const ROUTE_NAMES = {
   HOME: 'home',
   ABOUT: 'about',
   SHOW: 'show',
-};
+} as const;
 
 const routes = [
   {

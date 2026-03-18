@@ -11,10 +11,12 @@
   </form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 
-const emit = defineEmits(['change-search-box']);
+const emit = defineEmits<{
+  (e: 'change-search-box', searchText: string): void;
+}>();
 const searchText = ref('');
 
 function handleSearch() {

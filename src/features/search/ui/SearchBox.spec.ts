@@ -12,6 +12,6 @@ describe('SearchBox.vue', () => {
     await wrapper.find('form').trigger('submit.prevent');
 
     expect(wrapper.emitted('change-search-box')).toBeTruthy();
-    expect(wrapper.emitted('change-search-box')[0]).toEqual(['Friends']);
+    expect(wrapper.emitted('change-search-box')?.[0]).toEqual(['Friends']);
   });
 });
