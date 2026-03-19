@@ -1,6 +1,6 @@
 /**
  * TV Maze API types
- * @see http://api.tvmaze.com
+ * @see https://api.tvmaze.com
  */
 
 export type ShowImage = {
