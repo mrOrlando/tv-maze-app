@@ -62,7 +62,8 @@ describe('Favorites', () => {
         const trimmed = actorName.trim();
         expect(trimmed.length).to.be.greaterThan(0);
 
-        cy.get('[data-test="favorite-actor-toggle"]').scrollIntoView().click();
+        cy.get('[data-test="favorite-actor-toggle"]').scrollIntoView();
+        cy.get('[data-test="favorite-actor-toggle"]').click();
         cy.get('[data-test="favorite-actor-toggle"]').should('contain', 'In favorites');
 
         cy.get('[data-test="nav-favorites"]').click();
@@ -77,13 +78,15 @@ describe('Favorites', () => {
     cy.get('.card').contains('[data-test="card-title"]', friendsShow.name).click();
     cy.get('.cast-flip-card', { timeout: 20000 }).first().click();
 
-    cy.get('[data-test="favorite-actor-toggle"]').scrollIntoView().click();
+    cy.get('[data-test="favorite-actor-toggle"]').scrollIntoView();
+    cy.get('[data-test="favorite-actor-toggle"]').click();
     cy.get('[data-test="nav-favorites"]').click();
     cy.get('[data-test="person-card-title"]').should('exist');
 
     cy.get('.person-card').first().click();
     cy.location('pathname').should('match', /^\/actors\/\d+$/);
-    cy.get('[data-test="favorite-actor-toggle"]').scrollIntoView().click();
+    cy.get('[data-test="favorite-actor-toggle"]').scrollIntoView();
+    cy.get('[data-test="favorite-actor-toggle"]').click();
     cy.get('[data-test="favorite-actor-toggle"]').should('contain', 'Add to favorites');
 
     cy.get('[data-test="nav-favorites"]').click();
