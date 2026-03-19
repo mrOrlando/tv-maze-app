@@ -75,9 +75,20 @@ const { favorites: favoriteActors } = storeToRefs(actorsStore);
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 320px));
-    justify-content: center;
     gap: 1.25rem 1.5rem;
+    grid-template-columns: minmax(0, 1fr);
+
+    @media (min-width: 520px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 }
 </style>
