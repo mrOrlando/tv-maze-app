@@ -1,16 +1,39 @@
 <template>
   <div class="favorites">
-    <NH1>Favorite shows</NH1>
-    <NEmpty v-if="!favorites.length" description="You have not added any shows yet.">
-      <template #extra>
-        <RouterLink :to="{ name: ROUTE_NAMES.HOME }" v-slot="{ navigate }">
-          <NButton type="primary" @click="navigate">Browse shows</NButton>
-        </RouterLink>
-      </template>
-    </NEmpty>
-    <div v-else class="favorites__grid">
-      <Card v-for="show in favorites" :key="show.id" class="favorites__item" :show="show" />
-    </div>
+    <NH1>Favorites</NH1>
+
+    <section class="favorites__section" aria-labelledby="favorites-shows-heading">
+      <h2 id="favorites-shows-heading" class="favorites__section-title">Shows</h2>
+      <NEmpty v-if="!favoriteShows.length" description="No favorite shows yet.">
+        <template #extra>
+          <RouterLink :to="{ name: ROUTE_NAMES.HOME }" v-slot="{ navigate }">
+            <NButton type="primary" @click="navigate">Browse shows</NButton>
+          </RouterLink>
+        </template>
+      </NEmpty>
+      <div v-else class="favorites__grid">
+        <Card v-for="show in favoriteShows" :key="show.id" class="favorites__item" :show="show" />
+      </div>
+    </section>
+
+    <section class="favorites__section" aria-labelledby="favorites-actors-heading">
+      <h2 id="favorites-actors-heading" class="favorites__section-title">Actors</h2>
+      <NEmpty v-if="!favoriteActors.length" description="No favorite actors yet.">
+        <template #extra>
+          <RouterLink :to="{ name: ROUTE_NAMES.HOME }" v-slot="{ navigate }">
+            <NButton type="primary" @click="navigate">Find shows & actors</NButton>
+          </RouterLink>
+        </template>
+      </NEmpty>
+      <div v-else class="favorites__grid">
+        <PersonCard
+          v-for="person in favoriteActors"
+          :key="person.id"
+          class="favorites__item"
+          :person="person"
+        />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -18,11 +41,15 @@
 import { storeToRefs } from 'pinia';
 import { NH1, NButton, NEmpty } from 'naive-ui';
 import { useFavoriteShowsStore } from '@/entities/favorite-shows';
+import { useFavoriteActorsStore } from '@/entities/favorite-actors';
 import { Card } from '@/entities/show';
+import { PersonCard } from '@/entities/person';
 import { ROUTE_NAMES } from '@/app/routes';
 
-const favoriteStore = useFavoriteShowsStore();
-const { favorites } = storeToRefs(favoriteStore);
+const showsStore = useFavoriteShowsStore();
+const actorsStore = useFavoriteActorsStore();
+const { favorites: favoriteShows } = storeToRefs(showsStore);
+const { favorites: favoriteActors } = storeToRefs(actorsStore);
 </script>
 
 <style lang="scss" scoped>
@@ -31,13 +58,26 @@ const { favorites } = storeToRefs(favoriteStore);
   margin: 0 auto;
   text-align: left;
 
+  &__section {
+    margin-top: 2rem;
+
+    &:first-of-type {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &__section-title {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
   &__grid {
     display: grid;
-    /* Cap column width so a single card does not stretch to full row (avoid 1fr max track) */
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 320px));
     justify-content: start;
     gap: 1.25rem 1.5rem;
-    margin-top: 1.5rem;
   }
 }
 </style>
