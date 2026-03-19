@@ -76,7 +76,7 @@ const { favorites: favoriteActors } = storeToRefs(actorsStore);
   &__grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 320px));
-    justify-content: start;
+    justify-content: center;
     gap: 1.25rem 1.5rem;
   }
 }
