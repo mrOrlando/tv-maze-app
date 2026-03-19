@@ -25,7 +25,12 @@
 import { computed } from 'vue';
 import { NH1, NButton, NEmpty } from 'naive-ui';
 import { useFavoriteActorsStore } from '@/entities/favorite-actors';
-import { ActorMainCard, ActorShowsList, ActorPageSkeleton, useActorPage } from '@/features/actor-details';
+import {
+  ActorMainCard,
+  ActorShowsList,
+  ActorPageSkeleton,
+  useActorPage,
+} from '@/features/actor-details';
 
 const props = defineProps<{
   id: string | number;
@@ -35,7 +40,7 @@ const favoriteActorsStore = useFavoriteActorsStore();
 const { loading, person, castCredits } = useActorPage(props.id);
 
 const isFavorite = computed(() =>
-  person.value.id ? favoriteActorsStore.isFavorite(person.value.id) : false,
+  person.value.id ? favoriteActorsStore.isFavorite(person.value.id) : false
 );
 
 function toggleFavorite() {

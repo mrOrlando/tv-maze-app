@@ -29,7 +29,7 @@ export function readFavoriteActorsFromStorage(): CastPerson[] {
         item !== null &&
         typeof item === 'object' &&
         typeof (item as CastPerson).id === 'number' &&
-        typeof (item as CastPerson).name === 'string',
+        typeof (item as CastPerson).name === 'string'
     );
   } catch {
     return [];

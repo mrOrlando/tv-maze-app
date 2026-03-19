@@ -3,11 +3,12 @@
     <NSpace vertical :size="12">
       <NInputGroup>
         <NInput
-          v-model:value="searchText"
+          :value="searchText"
           type="text"
           placeholder="Enter a show name"
           :input-props="{ 'data-test': 'search-input' } as Record<string, string>"
           clearable
+          @update:value="setSearchText"
           @keyup.enter="handleSearch"
         />
         <NButton type="primary" attr-type="submit">Search</NButton>
@@ -25,8 +26,11 @@ const emit = defineEmits<{
 }>();
 const searchText = ref('');
 
+function setSearchText(val: string | null) {
+  searchText.value = val ?? '';
+}
+
 function handleSearch() {
   emit('change-search-box', searchText.value);
 }
 </script>
-

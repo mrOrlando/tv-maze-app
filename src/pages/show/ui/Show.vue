@@ -16,11 +16,7 @@
       </div>
       <ShowMainCard v-if="show.name" :show="show" />
       <div v-if="show._embedded?.cast" class="tv-show__cast">
-        <CastFlipCard
-          v-for="cast in show._embedded.cast"
-          :key="cast.person.id"
-          :cast="cast"
-        />
+        <CastFlipCard v-for="cast in show._embedded.cast" :key="cast.person.id" :cast="cast" />
       </div>
     </template>
   </div>
@@ -42,7 +38,9 @@ const showStore = useShowStore();
 const favoriteStore = useFavoriteShowsStore();
 const show = ref<Show>({} as Show);
 
-const isFavorite = computed(() => (show.value.id ? favoriteStore.isFavorite(show.value.id) : false));
+const isFavorite = computed(() =>
+  show.value.id ? favoriteStore.isFavorite(show.value.id) : false
+);
 
 function toggleFavorite() {
   if (show.value.id) {

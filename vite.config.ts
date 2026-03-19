@@ -2,7 +2,11 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
+// GitHub Pages project site: set VITE_BASE_PATH=/repo-name/ in CI (see .github/workflows)
+const base = process.env.VITE_BASE_PATH?.replace(/\/?$/, '/') || '/';
+
 export default defineConfig({
+  base,
   plugins: [vue()],
   resolve: {
     alias: {

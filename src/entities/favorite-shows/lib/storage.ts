@@ -30,7 +30,7 @@ export function readFavoriteShowsFromStorage(): Show[] {
         item !== null &&
         typeof item === 'object' &&
         typeof (item as Show).id === 'number' &&
-        typeof (item as Show).name === 'string',
+        typeof (item as Show).name === 'string'
     );
   } catch {
     return [];

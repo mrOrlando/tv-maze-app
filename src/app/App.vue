@@ -3,12 +3,12 @@
   <NLayout position="absolute">
     <NLayoutHeader bordered class="nav-header">
       <NSpace justify="center" align="center" :size="16">
-        <RouterLink :to="homeUrl" v-slot="{ navigate, isActive }">
+        <RouterLink v-slot="{ navigate, isActive }" :to="homeUrl">
           <NButton quaternary :type="isActive ? 'primary' : undefined" @click="navigate">
             Home
           </NButton>
         </RouterLink>
-        <RouterLink :to="favoritesUrl" v-slot="{ navigate, isActive }">
+        <RouterLink v-slot="{ navigate, isActive }" :to="favoritesUrl">
           <NButton quaternary :type="isActive ? 'primary' : undefined" @click="navigate">
             Favorites
           </NButton>

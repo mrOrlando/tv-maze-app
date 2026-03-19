@@ -13,11 +13,7 @@
     </NCard>
     <div class="skeleton skeleton-text actor-page-skeleton__shows-title"></div>
     <div class="actor-page-skeleton__list">
-      <div
-        v-for="i in 5"
-        :key="i"
-        class="actor-page-skeleton__list-item"
-      >
+      <div v-for="i in 5" :key="i" class="actor-page-skeleton__list-item">
         <div class="skeleton skeleton-poster"></div>
         <div class="skeleton skeleton-text actor-page-skeleton__list-name"></div>
       </div>
@@ -36,12 +32,7 @@ import { NCard } from 'naive-ui';
   text-align: left;
 
   .skeleton {
-    background: linear-gradient(
-      90deg,
-      #e8e8e8 25%,
-      #f0f0f0 50%,
-      #e8e8e8 75%
-    );
+    background: linear-gradient(90deg, #e8e8e8 25%, #f0f0f0 50%, #e8e8e8 75%);
     background-size: 200% 100%;
     animation: skeleton-shimmer 1.2s ease-in-out infinite;
     border-radius: 4px;
@@ -49,12 +40,7 @@ import { NCard } from 'naive-ui';
 
   :global(.n-card.n-card--dark .skeleton),
   :global(.dark .skeleton) {
-    background: linear-gradient(
-      90deg,
-      #2a2a2a 25%,
-      #363636 50%,
-      #2a2a2a 75%
-    );
+    background: linear-gradient(90deg, #2a2a2a 25%, #363636 50%, #2a2a2a 75%);
   }
 
   .skeleton-text {

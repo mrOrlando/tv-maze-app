@@ -9,7 +9,13 @@
           class="search-result__item"
         />
       </template>
-      <Card v-else v-for="show in shows" :key="show.id" class="search-result__item" :show="show"></Card>
+      <Card
+        v-for="show in shows"
+        v-else
+        :key="show.id"
+        class="search-result__item"
+        :show="show"
+      ></Card>
     </div>
   </div>
 </template>
