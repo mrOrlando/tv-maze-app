@@ -8,9 +8,9 @@
             Home
           </NButton>
         </RouterLink>
-        <RouterLink :to="aboutUrl" v-slot="{ navigate, isActive }">
+        <RouterLink :to="favoritesUrl" v-slot="{ navigate, isActive }">
           <NButton quaternary :type="isActive ? 'primary' : undefined" @click="navigate">
-            About
+            Favorites
           </NButton>
         </RouterLink>
       </NSpace>
@@ -34,7 +34,7 @@ import { ROUTE_NAMES } from '@/app/routes';
 import { NotificationContainer } from '@/widgets/notifications';
 
 const homeUrl = computed(() => ({ name: ROUTE_NAMES.HOME }));
-const aboutUrl = computed(() => ({ name: ROUTE_NAMES.ABOUT }));
+const favoritesUrl = computed(() => ({ name: ROUTE_NAMES.FAVORITES }));
 </script>
 
 <style lang="scss" scoped>

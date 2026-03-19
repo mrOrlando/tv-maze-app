@@ -37,6 +37,23 @@ const summaryText = computed(() =>
 .card {
   text-decoration: none;
   display: block;
+  color: inherit;
+  border-radius: var(--n-border-radius);
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  :deep(.n-card) {
+    transition: box-shadow 0.22s ease;
+  }
+
+  &:hover :deep(.n-card),
+  &:focus-visible :deep(.n-card) {
+    box-shadow:
+      0 2px 8px rgba(15, 23, 42, 0.06),
+      0 12px 28px rgba(15, 23, 42, 0.1);
+  }
 
   :deep(.n-card-header__main) {
     font-weight: 600;

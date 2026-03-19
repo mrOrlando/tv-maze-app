@@ -72,10 +72,20 @@ defineProps<{
     border-radius: 8px;
     text-decoration: none;
     color: inherit;
-    transition: background 0.2s;
+    transition:
+      background 0.2s ease,
+      box-shadow 0.22s ease;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background: var(--n-color-hover);
+      box-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.06),
+        0 8px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    &:focus-visible {
+      outline: none;
     }
   }
 

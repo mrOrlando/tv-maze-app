@@ -41,8 +41,8 @@ onMounted(() => {
 
   &__content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    /* % gap uses container size and can blow up row-gap; use fixed spacing */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 320px));
+    justify-content: center;
     gap: 1.25rem 1.5rem;
   }
 }

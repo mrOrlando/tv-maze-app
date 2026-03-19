@@ -2,10 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { HomePage } from '@/pages/home';
 import { ShowPage } from '@/pages/show';
 import { ActorPage } from '@/pages/actor';
+import { FavoritesPage } from '@/pages/favorites';
 
 export const ROUTE_NAMES = {
   HOME: 'home',
-  ABOUT: 'about',
+  FAVORITES: 'favorites',
   SHOW: 'show',
   ACTOR: 'actor',
 } as const;
@@ -17,9 +18,13 @@ const routes = [
     component: HomePage,
   },
   {
+    path: '/favorites',
+    name: ROUTE_NAMES.FAVORITES,
+    component: FavoritesPage,
+  },
+  {
     path: '/about',
-    name: ROUTE_NAMES.ABOUT,
-    component: () => import('@/pages/about/ui/About.vue'),
+    redirect: { name: ROUTE_NAMES.FAVORITES },
   },
   {
     path: '/shows/:id',
