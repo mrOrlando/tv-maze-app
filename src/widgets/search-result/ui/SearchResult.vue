@@ -35,10 +35,15 @@ onMounted(() => {
 
 <style lang="scss">
 .search-result {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
   &__content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 4%;
+    /* % gap uses container size and can blow up row-gap; use fixed spacing */
+    gap: 1.25rem 1.5rem;
   }
 }
 </style>

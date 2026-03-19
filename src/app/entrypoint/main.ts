@@ -1,3 +1,4 @@
+import '@/app/styles/global.scss';
 import { createApp, h } from 'vue';
 import { createPinia } from 'pinia';
 import { NConfigProvider } from 'naive-ui';
