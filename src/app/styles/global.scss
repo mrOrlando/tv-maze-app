@@ -1,0 +1,18 @@
+/**
+ * Naive UI NLayout keeps scroll inside `.n-layout-scroll-container` (overflow-x: hidden
+ * forces effective overflow-y: auto). Without locking the document, the same tall content
+ * also grows `html`/`body`, so you see two vertical scrollbars.
+ */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#app,
+#app > .n-config-provider {
+  display: block;
+  height: 100%;
+  position: relative;
+}
