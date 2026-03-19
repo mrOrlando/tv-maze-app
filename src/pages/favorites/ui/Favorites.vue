@@ -1,5 +1,5 @@
 <template>
-  <div class="favorites">
+  <div class="favorites" data-test="favorites-page">
     <NH1>Favorites</NH1>
 
     <section class="favorites__section" aria-labelledby="favorites-shows-heading">

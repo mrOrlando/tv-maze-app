@@ -1,0 +1,33 @@
+# Lint, unit tests, and E2E on PRs and non-default branch pushes.
+# Default branch deploy workflow also runs these checks before build.
+
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - main
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint:ci
+
+      - name: Unit tests
+        run: npm run test:unit
+
+      - name: E2E tests (Cypress)
+        run: npx --yes start-server-and-test@2 dev:ci http://127.0.0.1:8080 test:e2e

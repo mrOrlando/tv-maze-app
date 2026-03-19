@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:ci": "vite --host 127.0.0.1 --port 8080 --strictPort",
     "serve": "vite",
     "build": "vite build",
     "preview": "vite preview",
