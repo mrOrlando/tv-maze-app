@@ -1,6 +1,6 @@
 <template>
   <NAlert
-    :type="(notification.type as 'success' | 'info' | 'warning' | 'error')"
+    :type="notification.type as 'success' | 'info' | 'warning' | 'error'"
     closable
     @close="remove(notification)"
   >

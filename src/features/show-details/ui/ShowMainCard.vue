@@ -18,6 +18,8 @@
             </NTag>
           </NDescriptionsItem>
         </NDescriptions>
+        <!-- TVMaze returns HTML summary from the API -->
+        <!-- eslint-disable-next-line vue/no-v-html -->
         <div v-if="show.summary" class="show-main-card__summary" v-html="show.summary"></div>
       </div>
     </div>
@@ -25,12 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  NCard,
-  NDescriptions,
-  NDescriptionsItem,
-  NTag,
-} from 'naive-ui';
+import { NCard, NDescriptions, NDescriptionsItem, NTag } from 'naive-ui';
 import { formatDate as formatDateHelper } from '@/shared/lib/date';
 import type { Show } from '@/shared/api/types';
 

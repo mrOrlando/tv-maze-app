@@ -2,11 +2,7 @@
   <NCard class="actor-main-card">
     <div class="actor-main-card__layout">
       <div v-if="person.image?.medium" class="actor-main-card__photo-wrap">
-        <img
-          class="actor-main-card__photo"
-          :src="person.image.medium"
-          :alt="person.name"
-        />
+        <img class="actor-main-card__photo" :src="person.image.medium" :alt="person.name" />
       </div>
       <div v-else class="actor-main-card__placeholder">
         <NText strong>{{ person.name?.charAt(0) }}</NText>

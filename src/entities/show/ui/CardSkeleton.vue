@@ -21,12 +21,7 @@ import { NCard } from 'naive-ui';
 <style lang="scss" scoped>
 .card-skeleton {
   .skeleton {
-    background: linear-gradient(
-      90deg,
-      #e8e8e8 25%,
-      #f0f0f0 50%,
-      #e8e8e8 75%
-    );
+    background: linear-gradient(90deg, #e8e8e8 25%, #f0f0f0 50%, #e8e8e8 75%);
     background-size: 200% 100%;
     animation: skeleton-shimmer 1.2s ease-in-out infinite;
     border-radius: 4px;
@@ -34,12 +29,7 @@ import { NCard } from 'naive-ui';
 
   :global(.n-card.n-card--dark .skeleton),
   :global(.dark .skeleton) {
-    background: linear-gradient(
-      90deg,
-      #2a2a2a 25%,
-      #363636 50%,
-      #2a2a2a 75%
-    );
+    background: linear-gradient(90deg, #2a2a2a 25%, #363636 50%, #2a2a2a 75%);
   }
 
   .skeleton-text {

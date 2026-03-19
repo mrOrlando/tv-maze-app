@@ -17,11 +17,7 @@
       </div>
     </NCard>
     <div class="show-page-skeleton__cast">
-      <div
-        v-for="i in 6"
-        :key="i"
-        class="skeleton skeleton-cast-card"
-      ></div>
+      <div v-for="i in 6" :key="i" class="skeleton skeleton-cast-card"></div>
     </div>
   </div>
 </template>
@@ -37,12 +33,7 @@ import { NCard } from 'naive-ui';
   text-align: left;
 
   .skeleton {
-    background: linear-gradient(
-      90deg,
-      #e8e8e8 25%,
-      #f0f0f0 50%,
-      #e8e8e8 75%
-    );
+    background: linear-gradient(90deg, #e8e8e8 25%, #f0f0f0 50%, #e8e8e8 75%);
     background-size: 200% 100%;
     animation: skeleton-shimmer 1.2s ease-in-out infinite;
     border-radius: 4px;
@@ -50,12 +41,7 @@ import { NCard } from 'naive-ui';
 
   :global(.n-card.n-card--dark .skeleton),
   :global(.dark .skeleton) {
-    background: linear-gradient(
-      90deg,
-      #2a2a2a 25%,
-      #363636 50%,
-      #2a2a2a 75%
-    );
+    background: linear-gradient(90deg, #2a2a2a 25%, #363636 50%, #2a2a2a 75%);
   }
 
   .skeleton-text {

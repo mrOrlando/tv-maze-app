@@ -6,7 +6,7 @@
       <h2 id="favorites-shows-heading" class="favorites__section-title">Shows</h2>
       <NEmpty v-if="!favoriteShows.length" description="No favorite shows yet.">
         <template #extra>
-          <RouterLink :to="{ name: ROUTE_NAMES.HOME }" v-slot="{ navigate }">
+          <RouterLink v-slot="{ navigate }" :to="{ name: ROUTE_NAMES.HOME }">
             <NButton type="primary" @click="navigate">Browse shows</NButton>
           </RouterLink>
         </template>
@@ -20,7 +20,7 @@
       <h2 id="favorites-actors-heading" class="favorites__section-title">Actors</h2>
       <NEmpty v-if="!favoriteActors.length" description="No favorite actors yet.">
         <template #extra>
-          <RouterLink :to="{ name: ROUTE_NAMES.HOME }" v-slot="{ navigate }">
+          <RouterLink v-slot="{ navigate }" :to="{ name: ROUTE_NAMES.HOME }">
             <NButton type="primary" @click="navigate">Find shows & actors</NButton>
           </RouterLink>
         </template>

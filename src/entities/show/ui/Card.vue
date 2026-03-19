@@ -28,9 +28,7 @@ const urlOfShow = computed(() => ({
 
 const avatar = computed(() => props.show.image?.medium);
 
-const summaryText = computed(() =>
-  props.show.summary ? htmlToPlainText(props.show.summary) : '',
-);
+const summaryText = computed(() => (props.show.summary ? htmlToPlainText(props.show.summary) : ''));
 </script>
 
 <style lang="scss" scoped>
