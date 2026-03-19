@@ -64,6 +64,18 @@ const actorUrl = computed(() => ({
   color: inherit;
   perspective: 1000px;
   min-height: 440px;
+  border-radius: var(--n-border-radius);
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:hover &__actor-card,
+  &:focus-visible &__actor-card {
+    box-shadow:
+      0 2px 8px rgba(15, 23, 42, 0.06),
+      0 12px 28px rgba(15, 23, 42, 0.1);
+  }
 
   &__inner {
     position: relative;
@@ -98,6 +110,7 @@ const actorUrl = computed(() => ({
     height: 100%;
     box-sizing: border-box;
     overflow: visible;
+    transition: box-shadow 0.22s ease;
 
     :deep(.n-card__content) {
       display: flex;
